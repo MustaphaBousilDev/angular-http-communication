@@ -8,7 +8,7 @@ import { User } from './interface/user';
 })
 export class AppComponent implements OnInit {
   title = 'angular-http';
-  private user: User={
+  private user:any={
       id:5,
       name: "mugiwara luffy",
       username: "Bret",
@@ -37,10 +37,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     //get the function when it initialyse
-    //this.onGetUsers()
+    this.onGetUsers()
     //this.onGetUser()
     //this.onCreateUser()
-    this.onUpdateUser()
+    //this.onUpdateUser()
+    //this.onPatchUser()
+    this.onDeleteUser()
   }
 
   onGetUsers(): void {
@@ -53,7 +55,7 @@ export class AppComponent implements OnInit {
 
   onGetUser(): void{
     this.userService.getUser().subscribe(
-      (response) => console.table(response),
+      (response) => console.log('Response from Delete',response),
       (error: any) => console.log(error),
       () => console.log('Done Getting user')
     )
@@ -72,6 +74,22 @@ export class AppComponent implements OnInit {
       (response) => console.log(response),
       (error: any) => console.log(error),
       () => console.log('Done updating user user')
+    )
+  }
+
+  onPatchUser():void{
+    this.userService.patchUser(this.user).subscribe(
+      (response) => console.log(response),
+      (error: any) => console.log(error),
+      () => console.log('Done patching user')
+    )
+  }
+
+  onDeleteUser(): void{
+    this.userService.deleteUser(5).subscribe(
+      (response) => console.log(response),
+      (error: any) => console.log(error),
+      () => console.log('DOne deleting user')
     )
   }
 
