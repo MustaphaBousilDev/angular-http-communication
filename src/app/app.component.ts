@@ -9,6 +9,7 @@ import { User } from './interface/user';
 export class AppComponent implements OnInit {
   title = 'angular-http';
   private user: User={
+      id:5,
       name: "mugiwara luffy",
       username: "Bret",
       email: "Sincere@april.biz",
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
       phone: "1-770-736-8031 x56442",
       website: "hildegard.org",
       company: {
-        name: "Romaguera-Crona",
+        name: "Romaguera-Crona little fuck",
         catchPhrase: "Multi-layered client-server neural-net",
         bs: "harness real-time e-markets"
       }
@@ -36,9 +37,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     //get the function when it initialyse
-    this.onGetUsers()
-    this.onGetUser()
-    this.onCreateUser()
+    //this.onGetUsers()
+    //this.onGetUser()
+    //this.onCreateUser()
+    this.onUpdateUser()
   }
 
   onGetUsers(): void {
@@ -64,4 +66,14 @@ export class AppComponent implements OnInit {
       () => console.log('Done Creating user')
     )
   }
+
+  onUpdateUser():void{
+    this.userService.updateUser(this.user).subscribe(
+      (response) => console.log(response),
+      (error: any) => console.log(error),
+      () => console.log('Done updating user user')
+    )
+  }
+
+
 }
