@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { User } from '../interface/user';
 import { environment } from 'src/environments/environment.development';
@@ -12,7 +12,14 @@ export class UserService {
 
   getUsers(): Observable<User[]>{
     console.log('from getUsers()')
-    return this.http.get<User[]>(`${this.apiUrl}/users`)
+    //myheader is value immutable(in other word we can set data once and never can change it)
+    let myHeaders = new HttpHeaders({'myheader':'headerValue'});
+    //myheader.set('id','123') <- this code is wrong because myheader is immutable the value of my header never change but the element id is created in request header
+    myHeaders=myHeaders.set('id','1234')
+    //overide old value
+    myHeaders=myHeaders.set('id','1234000')
+    myHeaders=myHeaders.append('id','00000')
+    return this.http.get<User[]>(`${this.apiUrl}/users`,{ headers:myHeaders })
   }
 
   getUser(): Observable<User>{

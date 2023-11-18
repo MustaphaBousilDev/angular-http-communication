@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
     //this.onCreateUser()
     //this.onUpdateUser()
     //this.onPatchUser()
-    this.onDeleteUser()
+    //this.onDeleteUser()
   }
 
   onGetUsers(): void {
