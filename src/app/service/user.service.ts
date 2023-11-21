@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs'
+import  {tap} from 'rxjs/operators'
 import { User } from '../interface/user';
 import { environment } from 'src/environments/environment.development';
 @Injectable({
@@ -19,7 +20,12 @@ export class UserService {
     //overide old value
     myHeaders=myHeaders.set('id','1234000')
     myHeaders=myHeaders.append('id','00000')
-    return this.http.get<User[]>(`${this.apiUrl}/users`,{ headers:myHeaders })
+    //return this.http.get<User[]>(`${this.apiUrl}/users`,{ headers:myHeaders })
+    return this.http.get<User[]>(`${this.apiUrl}/users`)
+    //we using pipe for do effect in data streaming and after that we continue streaming
+      .pipe(
+        tap(users => console.log(users))
+      )
   }
 
   getUser(): Observable<User>{
