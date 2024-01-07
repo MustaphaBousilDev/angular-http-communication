@@ -9,5 +9,7 @@ export interface User {
     address:Address
     phone:string
     website:string
-    company:Company
+    company:Company,
+    isAdmin?:string,
+    image?:string
 }

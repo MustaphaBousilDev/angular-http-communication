@@ -2,9 +2,11 @@
     <thead>
         <tr>
             <th>#</th>
+            <th>IMG</th>
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
+            <th>Role</th>
             <th>Phone</th>
             <th>Website</th>
         </tr>
@@ -12,9 +14,13 @@
     <tbody *ngFor="let user of users; let number=index">
         <tr>
             <td>#{{number +1}}</td>
+            <td>
+                <img [src]="user.image" height="50" width="50" class="avatar" alt=""/>
+            </td>
             <td>#{{user.name}}</td>
             <td>#{{user.username}}</td>
             <td>#{{user.email}}</td>
+            <td>#{{user.isAdmin}}</td>
             <td>#{{user.phone}}</td>
             <td>{{user.website}}</td>
         </tr>
