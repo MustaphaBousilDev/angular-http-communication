@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
-import  {map, tap} from 'rxjs/operators'
+import  {map, retry, tap} from 'rxjs/operators'
 import { User } from '../interface/user';
 import { environment } from 'src/environments/environment.development';
 @Injectable({
@@ -19,15 +19,8 @@ export class UserService {
   getUsers(): Observable<User[]>{
     //the pipe operator is used to attach the tap operator to the observable. The tap operator is used to log the fetched users to the console before returning the observable
     return this.http.get<User[]>(`${this.apiUrl}/users`).pipe(
-      tap(users => console.log(users)),
-      map(users => users.map(user =>({
-        ...user,
-        name:user.name.toUpperCase(),
-        isAdmin: user.id === 10 ? 'admin' : 'user' ,
-        image: `${this.defaultImg}/${user.username.toLowerCase()}`,
-        fuckingEmail:user.email,
-        searchKey: [user.name,user.username]
-      })))
+      //try get 3 time try 
+      retry(3)    
     )
   }
 
