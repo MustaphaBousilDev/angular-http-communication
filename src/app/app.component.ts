@@ -8,6 +8,7 @@ import { User } from './interface/user';
 })
 export class AppComponent implements OnInit {
   title = 'angular-http';
+  users :User[]=[];
   private user:any={
       id:5,
       name: "mugiwara luffy",
@@ -47,7 +48,10 @@ export class AppComponent implements OnInit {
 
   onGetUsers(): void {
     this.userService.getUsers().subscribe(
-      (response) => console.table(response),
+      (response) => {
+        console.table(response)
+        this.users=response
+      },
       (error: any) => console.log(error),
       () => console.log('Done Getting users')
     )
